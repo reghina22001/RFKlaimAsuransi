@@ -173,9 +173,9 @@ def load_models():
     """Load trained models and feature columns"""
     try:
         # Sesuaikan path dengan lokasi file model Anda
-        clf_model = joblib.load("classifier_model.pkl")
-        reg_model = joblib.load("regressor_model.pkl")
-        feature_names = joblib.load("feature_columns.pkl")
+        clf_model = joblib.load("C_classifier_model.pkl")
+        reg_model = joblib.load("C_regressor_model.pkl")
+        feature_names = joblib.load("C_feature_columns.pkl")
         
         return clf_model, reg_model, feature_names
     except FileNotFoundError as e:
