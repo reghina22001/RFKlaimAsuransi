@@ -265,7 +265,6 @@ def create_prediction_chart(status_proba):
     ])
     
     fig.update_layout(
-        title="Probabilitas Prediksi Klaim",
         xaxis_title="Status Klaim",
         yaxis_title="Probabilitas",
         yaxis=dict(tickformat='.0%'),
@@ -628,7 +627,7 @@ def show_user_input_tab():
                 
                 # Probability chart dengan styling yang lebih baik
     
-                st.markdown('<div class="chart-title">📈 Grafik Probabilitas</div>', unsafe_allow_html=True)
+                st.markdown('<div class="chart-title">📈 Grafik Probabilitas Prediksi Klaim</div>', unsafe_allow_html=True)
                 prob_chart = create_prediction_chart(status_proba)
                 st.plotly_chart(prob_chart, use_container_width=True)
                 st.markdown('</div>', unsafe_allow_html=True)
