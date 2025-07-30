@@ -299,8 +299,8 @@ def create_cost_breakdown_chart(cost_data):
     )])
     
     fig.update_layout(
-        title="Breakdown Biaya Perawatan",
         height=400,
+        showlegend=True,
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)'
     )
@@ -657,6 +657,26 @@ def show_user_input_tab():
                 summary_df = pd.DataFrame(summary_data)
                 st.dataframe(summary_df, use_container_width=True, hide_index=True)
                 st.markdown('</div>', unsafe_allow_html=True)
+                
+                # Cost breakdown chart
+                cost_data = {
+                    'Konsultasi': konsultasi,
+                    'Obat': obat,
+                    'Laboratorium': laboratorium,
+                    'Kamar': kamar_akomodasi,
+                    'Prosedur Non-Bedah': prosedur_non_bedah,
+                    'Prosedur Bedah': prosedur_bedah,
+                    'Radiologi': radiologi,
+                    'Lainnya': (tenaga_ahli + keperawatan + penunjang + pelayanan_darah + 
+                                rehabilitasi + rawat_intensif + alkes + bmhp + sewa_alat + 
+                                obat_kronis + obat_kemo)
+                }
+                
+                cost_chart = create_cost_breakdown_chart(cost_data)
+                if cost_chart:
+                    with st.container():
+                        st.markdown('<div class="chart-title">🧾 Breakdown Biaya Perawatan</div>', unsafe_allow_html=True)
+                        st.plotly_chart(cost_chart, use_container_width=True)
                 
             except Exception as e:
                 st.error(f"❌ Error dalam prediksi: {str(e)}")
