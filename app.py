@@ -563,8 +563,34 @@ def show_user_input_tab():
                     st.metric("Efisiensi Klaim", f"{efficiency:.1f}%")
                     
                     # Comparison chart dengan styling yang lebih baik
-        
+                # Summary data dalam format yang lebih rapi
+    
+                    st.markdown('<div class="chart-title">📋 Ringkasan Input</div>', unsafe_allow_html=True)
+                    
+                    summary_data = {
+                        'Parameter': [
+                            'Umur', 'Jenis Kelamin', 'Kelas Rawat', 'Length of Stay', 
+                            'ICU', 'Tarif INA-CBG', 'Total Tarif RS', 'Selisih Tarif'
+                        ],
+                        'Nilai': [
+                            f"{umur_tahun} tahun ({umur_hari} hari)",
+                            sex,
+                            f"Kelas {kelas_rawat}",
+                            f"{los} hari",
+                            icu_indikator,
+                            f"Rp {tarif_inacbg:,.0f}",
+                            f"Rp {total_tarif:,.0f}",
+                            f"Rp {total_tarif - tarif_inacbg:,.0f}"
+                        ]
+                    }
+                    
+                    summary_df = pd.DataFrame(summary_data)
+                    st.dataframe(summary_df, use_container_width=True, hide_index=True)
+                    st.markdown('</div>', unsafe_allow_html=True)
+            
                     st.markdown('<div class="chart-title">📊 Perbandingan Tarif</div>', unsafe_allow_html=True)
+                    
+                    # Comparison chart dengan styling yang lebih baik
                     comparison_data = pd.DataFrame({
                         'Kategori': ['Tarif INA-CBG', 'Total Tarif RS', 'Estimasi Klaim'],
                         'Jumlah': [tarif_inacbg, total_tarif, amount_pred],
@@ -632,30 +658,6 @@ def show_user_input_tab():
                 st.plotly_chart(prob_chart, use_container_width=True)
                 st.markdown('</div>', unsafe_allow_html=True)
                 
-                # Summary data dalam format yang lebih rapi
-    
-                st.markdown('<div class="chart-title">📋 Ringkasan Input</div>', unsafe_allow_html=True)
-                
-                summary_data = {
-                    'Parameter': [
-                        'Umur', 'Jenis Kelamin', 'Kelas Rawat', 'Length of Stay', 
-                        'ICU', 'Tarif INA-CBG', 'Total Tarif RS', 'Selisih Tarif'
-                    ],
-                    'Nilai': [
-                        f"{umur_tahun} tahun ({umur_hari} hari)",
-                        sex,
-                        f"Kelas {kelas_rawat}",
-                        f"{los} hari",
-                        icu_indikator,
-                        f"Rp {tarif_inacbg:,.0f}",
-                        f"Rp {total_tarif:,.0f}",
-                        f"Rp {total_tarif - tarif_inacbg:,.0f}"
-                    ]
-                }
-                
-                summary_df = pd.DataFrame(summary_data)
-                st.dataframe(summary_df, use_container_width=True, hide_index=True)
-                st.markdown('</div>', unsafe_allow_html=True)
                 
                 # Cost breakdown chart
                 cost_data = {
