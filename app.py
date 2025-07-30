@@ -24,7 +24,7 @@ st.markdown("""
         font-weight: bold;
         color: #2E86AB;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 4rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     .sub-header {
@@ -666,6 +666,7 @@ def main():
     """Main application function"""
     # Header
     st.markdown('<h1 class="main-header">🏥 Sistem Prediksi Klaim Asuransi BPJS</h1>', unsafe_allow_html=True)
+    st.markdown("<div style='margin-top: 2.5rem;'></div>", unsafe_allow_html=True)
     
     # Tabs
     tab1, tab2 = st.tabs(["📊 Informasi Sistem", "📝 Input Data Pengguna"])
