@@ -16,7 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS untuk styling yang lebih baik
+# Custom CSS untuk styling 
 st.markdown("""
 <style>
     .main-header {
@@ -172,7 +172,6 @@ kategori_fitur_lengkap = [
 def load_models():
     """Load trained models and feature columns"""
     try:
-        # Sesuaikan path dengan lokasi file model Anda
         clf_model = joblib.load("C_classifier_model.pkl")
         reg_model = joblib.load("C_regressor_model.pkl")
         feature_names = joblib.load("C_feature_columns.pkl")
@@ -347,7 +346,47 @@ def show_system_info_tab():
     </div>
     """, unsafe_allow_html=True)
     
-    # Layout grafik yang diperbaiki - menggunakan kolom yang lebih seimbang
+    # Performance metrics
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.markdown("""
+        <div class="metric-card">
+            <h3>🎯 Akurasi Model</h3>
+            <h2>85.25%</h2>
+            <p>Tingkat akurasi prediksi</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with col2:
+        st.markdown("""
+        <div class="metric-card">
+            <h3>📊 Presisi Model</h3>
+            <h2>85.67%</h2>
+            <p>Tingkat presisi prediksi</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div class="metric-card">
+            <h3>⚡ Recall Model</h3>
+            <h2>97.94%</h2>
+            <p>Tingkat recall prediksi</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col4:
+        st.markdown("""
+        <div class="metric-card">
+            <h3>🔄 F1-Score Model</h3>
+            <h2>91.39%</h2>
+            <p>Tingkat F1-Score prediksi</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    col_chart1, col_chart2 = st.columns(2)
+    
     col1, col2 = st.columns([1, 1])
     
     with col1:
@@ -386,10 +425,10 @@ def show_system_info_tab():
             'Kategori': kategori_fitur_lengkap
         }
         
-        # Ambil hanya 15 fitur teratas untuk visualisasi yang lebih rapi
+        # 15 fitur teratas untuk visualisasi yang lebih rapi
         feature_importance_df = pd.DataFrame(feature_importance_data).sort_values(
             'Tingkat Kepentingan', ascending=True
-        ).tail(15)  # Ambil 15 fitur teratas
+        ).tail(15)
         
         fig_importance = px.bar(
             feature_importance_df,
@@ -562,9 +601,7 @@ def show_user_input_tab():
                     efficiency = (amount_pred / total_tarif * 100) if total_tarif > 0 else 0
                     st.metric("Efisiensi Klaim", f"{efficiency:.1f}%")
                     
-                    # Comparison chart dengan styling yang lebih baik
-                # Summary data dalam format yang lebih rapi
-    
+                    # Summary data dalam format yang lebih rapi
                     st.markdown('<div class="chart-title">📋 Ringkasan Input</div>', unsafe_allow_html=True)
                     
                     summary_data = {
@@ -700,4 +737,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+    
